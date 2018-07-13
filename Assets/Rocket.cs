@@ -7,7 +7,6 @@ public class Rocket : MonoBehaviour {
 
     Rigidbody rigidBody;
     AudioSource audioSource;
-    bool m_PlayThrust = false;
 
 	// Use this for initialization
 	void Start () {
@@ -17,44 +16,40 @@ public class Rocket : MonoBehaviour {
 
 	// Update is called once per frame
 	void Update () {
-        ProcessInput();
-        PlaySounds();
+        Thrust();
+        Rotate();
 	}
 
-
-    private void PlaySounds()
+    private void Thrust()
     {
-        // We don't want to re-play if the clip is always playing.
-        if ( m_PlayThrust == true && ! audioSource.isPlaying )
+        if (Input.GetKey(KeyCode.Space))
         {
-            audioSource.Play();
-        }
-
-        if ( m_PlayThrust == false && audioSource.isPlaying )
-        {
-            audioSource.Stop();
-        }
-
-    }
-
-    private void ProcessInput()
-    {
-        if( Input.GetKey(KeyCode.Space))
-        {
-            m_PlayThrust = true;
             rigidBody.AddRelativeForce(Vector3.up);
+            if( !audioSource.isPlaying )
+            {
+                audioSource.Play();
+            }
         }
         else
         {
-            m_PlayThrust = false;
+            if( audioSource.isPlaying )
+            {
+                audioSource.Stop();
+            }
         }
+    }
 
-        if ( Input.GetKey(KeyCode.A))
+    private void Rotate()
+    {
+        if (Input.GetKey(KeyCode.A))
         {
             transform.Rotate(Vector3.forward);
-        } else if( Input.GetKey(KeyCode.D))
+        }
+        else if (Input.GetKey(KeyCode.D))
         {
             transform.Rotate(-Vector3.forward);
         }
     }
+
+
 }
