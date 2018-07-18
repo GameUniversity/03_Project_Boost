@@ -13,7 +13,7 @@ OcclusionCullingSettings:
 --- !u!104 &2
 RenderSettings:
   m_ObjectHideFlags: 0
-  serializedVersion: 8
+  serializedVersion: 9
   m_Fog: 0
   m_FogColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
   m_FogMode: 3
@@ -38,7 +38,8 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.4465934, g: 0.49642956, b: 0.5748249, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657892, g: 0.4964127, b: 0.5748172, a: 1}
+  m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
@@ -54,11 +55,10 @@ LightmapSettings:
     m_EnableBakedLightmaps: 1
     m_EnableRealtimeLightmaps: 1
   m_LightmapEditorSettings:
-    serializedVersion: 9
+    serializedVersion: 10
     m_Resolution: 2
     m_BakeResolution: 40
-    m_TextureWidth: 1024
-    m_TextureHeight: 1024
+    m_AtlasSize: 1024
     m_AO: 0
     m_AOMaxDistance: 1
     m_CompAOExponent: 1
@@ -153,8 +153,8 @@ Prefab:
       value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
-  m_ParentPrefab: {fileID: 100100000, guid: 249596cc867554c25953da8563a88194, type: 2}
-  m_IsPrefabParent: 0
+  m_SourcePrefab: {fileID: 100100000, guid: 249596cc867554c25953da8563a88194, type: 2}
+  m_IsPrefabAsset: 0
 --- !u!1001 &1410449142
 Prefab:
   m_ObjectHideFlags: 0
@@ -195,8 +195,8 @@ Prefab:
       value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
-  m_ParentPrefab: {fileID: 100100000, guid: e05657c3471424731896ca1d31145709, type: 2}
-  m_IsPrefabParent: 0
+  m_SourcePrefab: {fileID: 100100000, guid: e05657c3471424731896ca1d31145709, type: 2}
+  m_IsPrefabAsset: 0
 --- !u!1001 &1465226050
 Prefab:
   m_ObjectHideFlags: 0
@@ -237,8 +237,8 @@ Prefab:
       value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
-  m_ParentPrefab: {fileID: 100100000, guid: 9f55eab9ca68345e0b0c191f37466d63, type: 2}
-  m_IsPrefabParent: 0
+  m_SourcePrefab: {fileID: 100100000, guid: 9f55eab9ca68345e0b0c191f37466d63, type: 2}
+  m_IsPrefabAsset: 0
 --- !u!1001 &1643689089
 Prefab:
   m_ObjectHideFlags: 0
@@ -252,15 +252,15 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4232493101187464, guid: 1692762f54ab54a4da3091e963ad3708, type: 2}
       propertyPath: m_LocalPosition.y
-      value: 3.5
+      value: 2.09
       objectReference: {fileID: 0}
     - target: {fileID: 4232493101187464, guid: 1692762f54ab54a4da3091e963ad3708, type: 2}
       propertyPath: m_LocalPosition.z
-      value: -25
+      value: -22.66
       objectReference: {fileID: 0}
     - target: {fileID: 4232493101187464, guid: 1692762f54ab54a4da3091e963ad3708, type: 2}
       propertyPath: m_LocalRotation.x
-      value: -0.17364825
+      value: -0.095845714
       objectReference: {fileID: 0}
     - target: {fileID: 4232493101187464, guid: 1692762f54ab54a4da3091e963ad3708, type: 2}
       propertyPath: m_LocalRotation.y
@@ -272,15 +272,19 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4232493101187464, guid: 1692762f54ab54a4da3091e963ad3708, type: 2}
       propertyPath: m_LocalRotation.w
-      value: 0.9848078
+      value: 0.99539626
       objectReference: {fileID: 0}
     - target: {fileID: 4232493101187464, guid: 1692762f54ab54a4da3091e963ad3708, type: 2}
       propertyPath: m_RootOrder
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4232493101187464, guid: 1692762f54ab54a4da3091e963ad3708, type: 2}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: -11
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
-  m_ParentPrefab: {fileID: 100100000, guid: 1692762f54ab54a4da3091e963ad3708, type: 2}
-  m_IsPrefabParent: 0
+  m_SourcePrefab: {fileID: 100100000, guid: 1692762f54ab54a4da3091e963ad3708, type: 2}
+  m_IsPrefabAsset: 0
 --- !u!1001 &2137919995
 Prefab:
   m_ObjectHideFlags: 0
@@ -321,5 +325,5 @@ Prefab:
       value: 4
       objectReference: {fileID: 0}
     m_RemovedComponents: []
-  m_ParentPrefab: {fileID: 100100000, guid: 832f5be4fbdf848029adc6e8cadbb28f, type: 2}
-  m_IsPrefabParent: 0
+  m_SourcePrefab: {fileID: 100100000, guid: 832f5be4fbdf848029adc6e8cadbb28f, type: 2}
+  m_IsPrefabAsset: 0
