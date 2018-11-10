@@ -41,6 +41,12 @@ public class Rocket : MonoBehaviour {
 
     private void Rotate()
     {
+
+        // take manual control of rotation so that any force applied
+        // does not dominate the movement, thus allowing user controlled 
+        // recovery
+        rigidBody.freezeRotation = true;
+
         if (Input.GetKey(KeyCode.A))
         {
             transform.Rotate(Vector3.forward);
@@ -49,6 +55,8 @@ public class Rocket : MonoBehaviour {
         {
             transform.Rotate(-Vector3.forward);
         }
+
+        rigidBody.freezeRotation = false;
     }
 
 
