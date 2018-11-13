@@ -1,7 +1,5 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Rocket : MonoBehaviour {
 
@@ -69,9 +67,14 @@ public class Rocket : MonoBehaviour {
             case "Friendly":
                 // do nothing
                 break;
+            case "Finish":
+                print("Hit Finish");
+                SceneManager.LoadScene(1);
+                break;
             default:
                 // kaboom
                 print("you are dead");
+                SceneManager.LoadScene(0);
                 break;
         }
     }
