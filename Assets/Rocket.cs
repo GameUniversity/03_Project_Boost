@@ -10,6 +10,10 @@ public class Rocket : MonoBehaviour
     [SerializeField] public AudioClip deathExplosion;
     [SerializeField] public AudioClip successLanding;
 
+    [SerializeField] public ParticleSystem mainEngineParticle;
+    [SerializeField] public ParticleSystem deathExplosionParticle;
+    [SerializeField] public ParticleSystem successLandingParticle;
+
     Rigidbody rigidBody;
     AudioSource audioSource;
 
@@ -18,13 +22,15 @@ public class Rocket : MonoBehaviour
     public State currentState = State.Alive;
 
 	// Use this for initialization
-	void Start () {
+	void Start () 
+    {
         rigidBody = GetComponent<Rigidbody>();
         audioSource = GetComponent<AudioSource>();
 	}
 
 	// Update is called once per frame
-	void Update () {
+	void Update () 
+    {
         if ( currentState == State.Alive )
         {
             RespondToThrustInput();
@@ -41,6 +47,7 @@ public class Rocket : MonoBehaviour
         else
         {
             audioSource.Stop();
+            mainEngineParticle.Stop();
         }
     }
 
@@ -51,6 +58,7 @@ public class Rocket : MonoBehaviour
         {
             audioSource.PlayOneShot(mainEngine);
         }
+        mainEngineParticle.Play();
     }
 
     private void RespondToRotateInput()
@@ -96,7 +104,9 @@ public class Rocket : MonoBehaviour
     {
         currentState = State.Trancending;
         audioSource.Stop();
+        mainEngineParticle.Stop();
         audioSource.PlayOneShot(successLanding);
+        successLandingParticle.Play();
         Invoke("LoadNextScene", 1.5f);
     }
 
@@ -105,7 +115,9 @@ public class Rocket : MonoBehaviour
         // kaboom
         currentState = State.Dying;
         audioSource.Stop();
+        mainEngineParticle.Stop();
         audioSource.PlayOneShot(deathExplosion);
+        deathExplosionParticle.Play();
         Invoke("LoadFirstScene", 2f);
     }
 
