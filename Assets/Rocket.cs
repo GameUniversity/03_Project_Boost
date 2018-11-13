@@ -4,10 +4,14 @@ using UnityEngine.SceneManagement;
 public class Rocket : MonoBehaviour
 {
 
-    Rigidbody rigidBody;
-    AudioSource audioSource;
     [SerializeField] public float rcsThrust = 100f;
     [SerializeField] public float mainThrust = 1.0f;
+    [SerializeField] public AudioClip mainEngine;
+    [SerializeField] public AudioClip deathExplosion;
+    [SerializeField] public AudioClip successLanding;
+
+    Rigidbody rigidBody;
+    AudioSource audioSource;
 
     public enum State { Alive, Dying, Trancending }
 
@@ -23,33 +27,33 @@ public class Rocket : MonoBehaviour
 	void Update () {
         if ( currentState == State.Alive )
         {
-            Thrust();
-            Rotate();
-        } else {
-            audioSource.Stop();
+            RespondToThrustInput();
+            RespondToRotateInput();
         }
 	}
 
-    private void Thrust()
+    private void RespondToThrustInput()
     {
         if (Input.GetKey(KeyCode.Space))
         {
-            rigidBody.AddRelativeForce(Vector3.up * mainThrust );
-            if( !audioSource.isPlaying )
-            {
-                audioSource.Play();
-            }
+            ApplyThrust();
         }
         else
         {
-            if( audioSource.isPlaying )
-            {
-                audioSource.Stop();
-            }
+            audioSource.Stop();
         }
     }
 
-    private void Rotate()
+    private void ApplyThrust()
+    {
+        rigidBody.AddRelativeForce(Vector3.up * mainThrust);
+        if (!audioSource.isPlaying)
+        {
+            audioSource.PlayOneShot(mainEngine);
+        }
+    }
+
+    private void RespondToRotateInput()
     {
 
         // take manual control of rotation so that any force applied
@@ -80,15 +84,29 @@ public class Rocket : MonoBehaviour
                 // do nothing
                 break;
             case "Finish":
-                currentState = State.Trancending;
-                Invoke("LoadNextScene", 1.5f);
+                StartSuccessSequence();
                 break;
             default:
-                // kaboom
-                currentState = State.Dying;
-                Invoke("LoadFirstScene", 2f);
+                StartDeathSequence();
                 break;
         }
+    }
+
+    private void StartSuccessSequence()
+    {
+        currentState = State.Trancending;
+        audioSource.Stop();
+        audioSource.PlayOneShot(successLanding);
+        Invoke("LoadNextScene", 1.5f);
+    }
+
+    private void StartDeathSequence()
+    {
+        // kaboom
+        currentState = State.Dying;
+        audioSource.Stop();
+        audioSource.PlayOneShot(deathExplosion);
+        Invoke("LoadFirstScene", 2f);
     }
 
     private void LoadNextScene()
