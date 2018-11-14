@@ -20,6 +20,10 @@ public class Oscillator : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
+        // don't neet to worry about percision, since the only case
+        // we're interested in is exactly 0.
+        if ( period <= Mathf.Epsilon ) { return; }
+
         // todo protect against period == 0
         float cycles = Time.time / period;
 
