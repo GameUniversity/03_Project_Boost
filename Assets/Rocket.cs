@@ -17,6 +17,7 @@ public class Rocket : MonoBehaviour
 
     Rigidbody rigidBody;
     AudioSource audioSource;
+    int totalScenes;
 
     public enum State { Alive, Dying, Trancending }
 
@@ -27,7 +28,8 @@ public class Rocket : MonoBehaviour
     {
         rigidBody = GetComponent<Rigidbody>();
         audioSource = GetComponent<AudioSource>();
-	}
+        totalScenes = SceneManager.sceneCountInBuildSettings - 1;
+   	}
 
 	// Update is called once per frame
 	void Update () 
@@ -119,16 +121,22 @@ public class Rocket : MonoBehaviour
         mainEngineParticle.Stop();
         audioSource.PlayOneShot(deathExplosion);
         deathExplosionParticle.Play();
-        Invoke("LoadFirstScene", levelLoadDelay);
+        Invoke("LoadSceneRespawn", levelLoadDelay);
     }
 
     private void LoadNextScene()
     {
-        SceneManager.LoadScene(1);
+        var nextScene = SceneManager.GetActiveScene().buildIndex + 1;
+        if( nextScene > totalScenes )
+        {
+            nextScene = 0;
+        }
+        SceneManager.LoadScene(nextScene);
     }
 
-    private void LoadFirstScene()
+    private void LoadSceneRespawn()
     {
-        SceneManager.LoadScene(0);
+        // start over on same level
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 }
