@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class Rocket : MonoBehaviour
@@ -18,6 +19,7 @@ public class Rocket : MonoBehaviour
     Rigidbody rigidBody;
     AudioSource audioSource;
     int totalScenes;
+    bool ignoreCollisions;
 
     public enum State { Alive, Dying, Trancending }
 
@@ -29,6 +31,7 @@ public class Rocket : MonoBehaviour
         rigidBody = GetComponent<Rigidbody>();
         audioSource = GetComponent<AudioSource>();
         totalScenes = SceneManager.sceneCountInBuildSettings - 1;
+        ignoreCollisions = false;
    	}
 
 	// Update is called once per frame
@@ -39,7 +42,34 @@ public class Rocket : MonoBehaviour
             RespondToThrustInput();
             RespondToRotateInput();
         }
-	}
+
+        if(Debug.isDebugBuild)
+        {
+            RespondToDebugInput();
+        }
+
+    }
+
+    private void RespondToDebugInput()
+    {
+        if (Input.GetKeyDown(KeyCode.L))
+        {
+            LoadNextScene();
+        }
+        if (Input.GetKeyDown(KeyCode.C))
+        {
+            // toggle collision flag
+            ignoreCollisions = !ignoreCollisions;
+        }
+        if (Input.GetKeyDown(KeyCode.R))
+        {
+            LoadSceneRespawn();
+        }
+        if (Input.GetKeyDown(KeyCode.Q))
+        {
+            StartDeathSequence();
+        }
+    }
 
     private void RespondToThrustInput()
     {
@@ -98,6 +128,7 @@ public class Rocket : MonoBehaviour
                 StartSuccessSequence();
                 break;
             default:
+                if (ignoreCollisions) { return; }
                 StartDeathSequence();
                 break;
         }
